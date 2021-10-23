@@ -10,13 +10,23 @@ import {
 } from "vscode";
 import { getUri } from "../utils";
 
-export class HelloWorldPanel implements WebviewViewProvider {
+export class AutocompletePanel implements WebviewViewProvider {
   private _view?: WebviewView;
   private _disposables: Disposable[] = [];
   private _extensionUri: Uri;
 
   constructor(extensionUri: Uri) {
     this._extensionUri = extensionUri;
+  }
+
+  public update(content: string[]) {
+    if (this._view) {
+      this._view.webview.html = this._getWebviewContent(
+        this._view.webview,
+        this._extensionUri,
+        content
+      );
+    }
   }
 
   resolveWebviewView(
@@ -46,18 +56,11 @@ export class HelloWorldPanel implements WebviewViewProvider {
     }
   }
 
-  /**
-   * Defines and returns the HTML that should be rendered within the webview panel.
-   *
-   * @remarks This is also the place where references to CSS and JavaScript files/packages
-   * (such as the Webview UI Toolkit) are created and inserted into the webview HTML.
-   *
-   * @param webview A reference to the extension webview
-   * @param extensionUri The URI of the directory containing the extension
-   * @returns A template string literal containing the HTML that should be
-   * rendered within the webview panel
-   */
-  private _getWebviewContent(webview: Webview, extensionUri: Uri) {
+  private _getWebviewContent(
+    webview: Webview,
+    extensionUri: Uri,
+    content?: string[]
+  ) {
     const toolkitUri = getUri(webview, extensionUri, [
       "node_modules",
       "@vscode",
@@ -66,6 +69,11 @@ export class HelloWorldPanel implements WebviewViewProvider {
       "toolkit.js",
     ]);
     const mainUri = getUri(webview, extensionUri, ["media", "main.js"]);
+    const cssUri = getUri(webview, extensionUri, ["media", "main.css"]);
+    let table = "";
+    content?.forEach((item) => {
+      table += `<vscode-data-grid-row><vscode-data-grid-cell><code>${item}</code></vscode-data-grid-cell></vscode-data-grid-row>`;
+    });
 
     return /*html*/ `
       <!DOCTYPE html>
@@ -75,11 +83,12 @@ export class HelloWorldPanel implements WebviewViewProvider {
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <script type="module" src="${toolkitUri}"></script>
           <script type="module" src="${mainUri}"></script>
-          <title>Hello World!</title>
+          <link rel="stylesheet" href="${cssUri}">
         </head>
         <body>
-          <h1>Hello World!</h1>
-          <vscode-button id="howdy">Howdy!</vscode-button>
+          <vscode-data-grid id="basic-grid" aria-label="Default">
+            ${table}
+          </vscode-data-grid>
         </body>
       </html>
     `;

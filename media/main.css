@@ -1,0 +1,11 @@
+.tooltip code {
+  white-space: normal;
+}
+
+vscode-data-grid-row {
+  display: block;
+}
+
+vscode-data-grid-row code {
+  overflow-wrap: normal;
+}
