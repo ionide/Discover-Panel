@@ -55,6 +55,7 @@ export function activate(context: ExtensionContext) {
   });
 
   let lastPositionAutocomplete: Position | undefined;
+  let lastAutocompleteResults: CompletionList | undefined;
   window.onDidChangeTextEditorSelection(async (e) => {
     let range = e.textEditor.document.getWordRangeAtPosition(
       e.textEditor.selection.active
@@ -65,20 +66,24 @@ export function activate(context: ExtensionContext) {
         !range.start.isEqual(lastPositionAutocomplete))
     ) {
       lastPositionAutocomplete = range.start;
-      let result: CompletionList | undefined = await commands.executeCommand(
+      lastAutocompleteResults = await commands.executeCommand(
         "vscode.executeCompletionItemProvider",
         e.textEditor.document.uri,
         lastPositionAutocomplete
       );
-      if (result) {
-        console.log(result);
-
-        autocompeltePanel.update(
-          result.items
-            .filter((r) => r.kind !== CompletionItemKind.Snippet)
-            .map((r) => (typeof r.label === "string" ? r.label : r.label.label))
-        );
-      }
+    }
+    if (lastAutocompleteResults && lastPositionAutocomplete) {
+      let prefixRange = new Range(
+        lastPositionAutocomplete,
+        e.textEditor.selection.active
+      );
+      let prefix = e.textEditor.document.getText(prefixRange);
+      autocompeltePanel.update(
+        lastAutocompleteResults.items
+          .filter((r) => r.kind !== CompletionItemKind.Snippet)
+          .map((r) => (typeof r.label === "string" ? r.label : r.label.label))
+          .filter((r) => r.startsWith(prefix))
+      );
     }
   });
 }
