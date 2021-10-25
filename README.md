@@ -1,70 +1,80 @@
-# discoverpanel README
+# Discover Panel
 
-This is the README for your extension "discoverpanel". After writing up a brief description, we recommend including the following sections.
+Discover Panel is an extension that provides alternative UX for exploring APIs while coding. Its goal is to replace standard widget/popup based UI for API explorations - autocomplete and tooltips. It plugs into built-in VSCode APIs so it should work with any programming language - information displayed in the panel is taken from specific extensions you are using for given programming language.
 
-## Features
+![docs/example.mov](docs/example.mov)
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+## Why?
 
-For example if there is an image subfolder under your extension project workspace:
+In general I believe into providing developers with editor UX that's not disruptive or intrusive - I strongly believe into adding virtual enhancements to editor buffer. This trend is clearly present in my other projects like [Ionide-F#](https://marketplace.visualstudio.com/items?itemName=Ionide.Ionide-fsharp) where we have whole set of various "virtual" type information hints, or in [GitHub Copilot](https://copilot.github.com/) where we present suggestions as "ghost" text.
 
-\!\[feature X\]\(images/feature-x.png\)
+The idea behind Discover Panel was created after one of my colleagues has sent me this image:
+![docs/why.png](docs/why.png)
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+On the one hand, all information presented in those popups is useful in some scenarios - tooltips, and autocomplete have huge value for API discoverability. On the other hand, this is clearly intrusive - it basically covers all code the developer was working on in this given moment. As mentioned above, I'd rather see some kind of inline, virtual suggestion here (in style of GitHub Copilot suggestions). However, disabling autocomplete and tooltip widgets creates an issue for the API discoverability - you no longer can just see what functions are types are in given module/namespace or what some functions that you use in code does.
+And hopefully, that's exactly the problem that can be solved by Discover Panel.
 
-## Requirements
+## Suggested VSCode settings
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- You can disable automatic showing of tooltip by setting `editor.hover.enabled` to `false`. Tooltip can still be triggered by running `Show Hover` command
 
-## Extension Settings
+- You can disable automatic showing of autocomplete widget by using following settings. Autocomplete widget can still be triggered by running `Trigger Suggest`:
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+```json
+"editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": false
+  }
+```
 
-For example:
+## How to contribute
 
-This extension contributes the following settings:
+_Imposter syndrome disclaimer_: I want your help. No really, I do.
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+There might be a little voice inside that tells you you're not ready; that you need to do one more tutorial, or learn another framework, or write a few more blog posts before you can help me with this project.
 
-## Known Issues
+I assure you, that's not the case.
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+This project has some clear Contribution Guidelines and expectations that you can [read here](CONTRIBUTING.md).
 
-## Release Notes
+The contribution guidelines outline the process that you'll need to follow to get a patch merged. By making expectations and process explicit, I hope it will make it easier for you to contribute.
 
-Users appreciate release notes as you update your extension.
+And you don't just have to write code. You can help out by writing documentation, tests, or even by giving feedback about this work. (And yes, that includes giving feedback about the contribution guidelines.)
 
-### 1.0.0
+Thank you for contributing!
 
-Initial release of ...
+## Contributing and copyright
 
-### 1.0.1
+The project is hosted on [GitHub](https://github.com/ionide/Discover-Panel) where you can [report issues](https://github.com/ionide/Discover-Panel/issues), participate in [discussions](https://github.com/ionide/Discover-Panel/discussions), fork
+the project and submit pull requests.
 
-Fixed issue #.
+The library is available under [MIT license](LICENSE.md), which allows modification and redistribution for both commercial and non-commercial purposes.
 
-### 1.1.0
+Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
 
-Added features X, Y, and Z.
+## Our Sponsors
 
------------------------------------------------------------------------------------------------------------
-## Following extension guidelines
+Discover Panel is released as part of Ionide organization - OSS organization focused on building cross platform, developer tools.
 
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
+You can support Ionide development on [Open Collective](https://opencollective.com/ionide).
 
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
+### Partners
 
-## Working with Markdown
+<div align="center">
 
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
+<a href="https://lambdafactory.io"><img src="https://cdn-images-1.medium.com/max/332/1*la7_YvDFvrtA720P5bYWBQ@2x.png" alt="drawing" width="100"/></a>
 
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
+</div>
 
-### For more information
+### Sponsors
 
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+[Become a sponsor](https://opencollective.com/ionide) and get your logo on our README on Github, description in the VSCode marketplace and on [ionide.io](https://ionide.io) with a link to your site.
 
-**Enjoy!**
+<div align="center">
+    <a href="https://ionide.io/sponsors.html">
+        <img src="https://opencollective.com/ionide/tiers/silver-sponsor.svg?avatarHeight=120&width=1000&button=false"/>
+        <br/>
+        <img src="https://opencollective.com/ionide/tiers/bronze-sponsor.svg?avatarHeight=120&width=1000&button=false"/>
+    </a>
+</div>
