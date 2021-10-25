@@ -2,7 +2,7 @@
 
 Discover Panel is an extension that provides alternative UX for exploring APIs while coding. Its goal is to replace standard widget/popup based UI for API explorations - autocomplete and tooltips. It plugs into built-in VSCode APIs so it should work with any programming language - information displayed in the panel is taken from specific extensions you are using for given programming language.
 
-![docs/example.mov](docs/example.mov)
+https://user-images.githubusercontent.com/5427083/138778777-237ebcd6-db9e-4549-a0a1-023744a6bc4e.mov
 
 ## Why?
 
