@@ -1,14 +1,30 @@
 {
   "name": "discoverpanel",
-  "displayName": "DiscoverPanel",
-  "description": "",
+  "displayName": "Discover Panel",
+  "publisher": "Ionide",
+  "contributors": [
+    {
+      "name": "Krzysztof Cieślak",
+      "url": "https://twitter.com/k_cieslak"
+    }
+  ],
+  "preview": false,
+  "description": "Extension creating alternative UX for real time API exploration in VSCode",
   "version": "0.0.1",
+  "license": "SEE LICENSE IN LICENSE.md",
   "engines": {
     "vscode": "^1.61.0"
   },
   "categories": [
     "Other"
   ],
+  "bugs": {
+    "url": "https://github.com/ionide/Discover-Panel/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ionide/Discover-Panel.git"
+  },
   "main": "./out/extension.js",
   "activationEvents": [
     "onView:discoverpanel.tooltip",
