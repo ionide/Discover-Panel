@@ -12,6 +12,7 @@
   "description": "Extension creating alternative UX for real time API exploration in VSCode",
   "version": "0.0.1",
   "license": "SEE LICENSE IN LICENSE.md",
+  "icon": "assets/logo.png",
   "engines": {
     "vscode": "^1.61.0"
   },
